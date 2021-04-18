@@ -57,7 +57,7 @@ light1.add(pointLight2.position, 'z').min(-3).max(3).step(0.01)
 light1.add(pointLight2, 'intensity').min(0).max(10).step(0.01)
 
 const pointLightHelper = new THREE.PointLightHelper(pointLight2, 1)
-scene.add(pointLightHelper)
+// scene.add(pointLightHelper)
 
 // Light3
 
@@ -84,7 +84,7 @@ light2.addColor(light2Color, 'color')
     })
 
 const pointLightHelper2 = new THREE.PointLightHelper(pointLight3, 1)
-scene.add(pointLightHelper2)
+// scene.add(pointLightHelper2)
 
 /**
  * Sizes
@@ -117,7 +117,7 @@ const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 
 camera.position.x = 0
 camera.position.y = 0
 camera.position.z = 2
-scene.add(camera)
+// scene.add(camera)
 
 // Controls
 // const controls = new OrbitControls(camera, canvas)
@@ -128,7 +128,7 @@ scene.add(camera)
  */
 const renderer = new THREE.WebGLRenderer({
     canvas: canvas,
-    alpha: true
+    // alpha: true
 })
 renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
@@ -137,18 +137,36 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
  * Animate
  */
 
+document.addEventListener('mousemove', onDocimentMouseMove)
 
+let mouseX = 0
+let mouseY = 0
+
+let targetX = 0
+let targetY = 0
+
+const windowHalfX = window.innerWidth / 2;
+const windowHalfY = window.innerHeight / 2;
+
+const windowX = window.innerWidth / 2;
+const windowY = window.innerHeight / 2;
+
+function onDocimentMouseMove(event) {
+    mouseX = (event.clientX - windowX)
+    mouseX = (event.clientY - windowY)
+}
 
 const clock = new THREE.Clock()
 
 const tick = () =>
 {
+    targetX = mouseX * .001
+    targetY = mouseY * .001
 
     const elapsedTime = clock.getElapsedTime()
 
     // Update objects
     sphere.rotation.y = .5 * elapsedTime
-
     // Update Orbital Controls
     // controls.update()
 
